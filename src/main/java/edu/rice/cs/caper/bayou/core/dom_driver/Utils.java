@@ -31,22 +31,30 @@ public final class Utils {
     }
 
     public static boolean isRelevantCall(IMethodBinding binding, Visitor visitor) {
-        ITypeBinding cls;
-        if (binding == null || (cls = binding.getDeclaringClass()) == null)
+        /*ITypeBinding cls;
+        if (binding == null || (cls = binding.getDeclaringClass()) == null){
+            if (binding == null){
+                System.out.println("binding is null");
+            }
+            else{
+                System.out.println("cls is null");
+            }
             return false;
-        IPackageBinding pack = cls.getPackage();
+        }
+		IPackageBinding pack = cls.getPackage();
         String[] packs = pack.getNameComponents();
         if (packs.length > 0 && visitor.options.API_MODULES.contains(packs[0]))
             return true;
         if (visitor.options.API_PACKAGES.contains(pack.getName()))
             return true;
         String className = cls.getQualifiedName();
-        if (className.contains("<")) /* be agnostic to generic versions */
+        if (className.contains("<")) // be agnostic to generic versions
             className = className.substring(0, className.indexOf("<"));
         if (visitor.options.API_CLASSES.contains(className))
             return true;
 
-        return false;
+        return false; */
+	return true;
     }
 
     public static MethodDeclaration checkAndGetLocalMethod(IMethodBinding binding, Visitor visitor) {

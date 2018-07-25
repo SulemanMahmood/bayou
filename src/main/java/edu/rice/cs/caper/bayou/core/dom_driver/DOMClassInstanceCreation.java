@@ -18,6 +18,9 @@ package edu.rice.cs.caper.bayou.core.dom_driver;
 
 import edu.rice.cs.caper.bayou.core.dsl.DAPICall;
 import edu.rice.cs.caper.bayou.core.dsl.DSubTree;
+
+import java.awt.print.Printable;
+
 import org.eclipse.jdt.core.dom.*;
 
 public class DOMClassInstanceCreation implements Handler {
@@ -69,6 +72,8 @@ public class DOMClassInstanceCreation implements Handler {
                 tree.addNode(new DAPICall(binding, visitor.getLineNumber(creation)));
             } catch (DAPICall.InvalidAPICallException e) {
                 // continue without adding the node
+            } catch (NullPointerException e) {
+                tree.addNode(new DAPICall(creation, visitor.getLineNumber(creation), visitor));
             }
         }
         return tree;

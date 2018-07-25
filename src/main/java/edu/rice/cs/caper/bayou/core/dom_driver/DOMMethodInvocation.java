@@ -75,6 +75,8 @@ public class DOMMethodInvocation implements Handler {
                 tree.addNode(new DAPICall(binding, visitor.getLineNumber(invocation)));
             } catch (DAPICall.InvalidAPICallException e) {
                 // continue without adding the node
+            } catch (NullPointerException e) {
+                tree.addNode(new DAPICall(invocation, visitor.getLineNumber(invocation), visitor));
             }
         }
         return tree;

@@ -16,10 +16,10 @@ limitations under the License.
 package edu.rice.cs.caper.bayou.core.dsl;
 
 
+import edu.rice.cs.caper.bayou.core.dom_driver.Visitor;
 import edu.rice.cs.caper.bayou.core.synthesizer.*;
 import edu.rice.cs.caper.bayou.core.synthesizer.Type;
 import org.eclipse.jdt.core.dom.*;
-
 import java.lang.reflect.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -62,6 +62,69 @@ public class DAPICall extends DASTNode
                                             methodBinding.getReturnType().getQualifiedName());
         this.linenum = linenum;
         this.node = "DAPICall";
+    }
+
+    public DAPICall(ClassInstanceCreation creation, int lineNumber, Visitor visitor) {
+        this._returns = "void";
+        this._throws = new ArrayList<>();
+        this._call = getCallFromImports(creation.getType().toString(), creation.arguments(), visitor);
+        this.linenum = lineNumber;
+        this.node = "DAPICall";
+    }
+
+    public DAPICall(MethodInvocation invocation, int lineNumber, Visitor visitor) {
+        this._returns = "void";
+        this._throws = new ArrayList<>();
+        this._call = getCallFromImports(invocation.getName().toString(), invocation.arguments(),  visitor);
+        this.linenum = lineNumber;
+        this.node = "DAPICall";
+    }
+
+    private String getCallFromImports(String methodName, List arguments, Visitor visitor) {
+        methodName = lookInImports(methodName, visitor);
+        methodName = methodName + "(";
+        for (int i = 0; i < arguments.size(); i++ ) {
+            String argument;
+            if (arguments.get(i) instanceof TypeLiteral) {
+                argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
+            }
+            else if (arguments.get(i) instanceof SimpleName) {
+                argument = ((SimpleName)(arguments.get(i))).toString();
+            }
+            else if (arguments.get(i) instanceof ClassInstanceCreation) {
+                argument = ((ClassInstanceCreation)(arguments.get(i))).getType().toString();
+            }
+            else if (arguments.get(i) instanceof NumberLiteral) {
+                argument = ((NumberLiteral)(arguments.get(i))).toString();
+            }
+            else if (arguments.get(i) instanceof MethodInvocation) {
+                argument = ((MethodInvocation)(arguments.get(i))).getName().toString();  // Can be alot better
+            }
+            else if (arguments.get(i) instanceof QualifiedName) {
+                argument = ((QualifiedName)(arguments.get(i))).toString();
+            }
+            else {
+                argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
+            }
+            argument = lookInImports(argument, visitor);
+            methodName = methodName + " " + argument; 
+            if (i != (arguments.size() - 1)) {
+                methodName = methodName + ", ";
+            }
+        }
+        methodName = methodName + ")";
+        return methodName;
+    }
+
+    private String lookInImports(String key, Visitor visitor) {
+        for (int i = 0; i < visitor.unit.imports().size(); i++ ) {
+            String imp = ((ImportDeclaration)(visitor.unit.imports().get(i))).getName().toString();
+            if (imp.endsWith(key)) {
+                key = imp;
+                break;
+            }
+        }
+        return key;
     }
 
     @Override
