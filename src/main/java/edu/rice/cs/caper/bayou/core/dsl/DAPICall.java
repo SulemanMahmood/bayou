@@ -110,10 +110,9 @@ public class DAPICall extends DASTNode
                 argument = "java.lang.Boolean";
             }
             else if (arguments.get(i) instanceof ThisExpression) {
-                argument = ((ThisExpression)(arguments.get(i))).getQualifier().toString();
+                argument = "this"
                 System.err.println("ThisExpression:");
                 System.err.println(((ThisExpression)(arguments.get(i))).toString());
-                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
                 argument = "int"; // Heuristically returning int
@@ -130,7 +129,6 @@ public class DAPICall extends DASTNode
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
             }
-            argument = lookInImports(argument, visitor);
             methodName = methodName + " " + argument; 
             if (i != (arguments.size() - 1)) {
                 methodName = methodName + ", ";
