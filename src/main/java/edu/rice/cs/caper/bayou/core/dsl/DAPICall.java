@@ -111,21 +111,21 @@ public class DAPICall extends DASTNode
             }
             else if (arguments.get(i) instanceof ThisExpression) {
                 argument = ((ThisExpression)(arguments.get(i))).getQualifier().toString();
-                System.err.println("This Expression:");
-                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
+                System.err.println("ThisExpression:");
+                System.err.println(((ThisExpression)(arguments.get(i))).toString());
                 System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
                 argument = "java.lang.String";
-                System.err.println("This Expression:");
-                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
-                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
+                System.err.println("PrefixExpression:");
+                System.err.println(((PrefixExpression)(arguments.get(i))).toString());
+                System.err.println(((PrefixExpression)(arguments.get(i))).getQualifier().toString());
             }
             else if (arguments.get(i) instanceof InfixExpression) {
                 argument = "java.lang.String";
-                System.err.println("This Expression:");
-                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
-                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
+                System.err.println("InfixExpression");
+                System.err.println(((InfixExpression)(arguments.get(i))).toString());
+                System.err.println(((InfixExpression)(arguments.get(i))).getQualifier().toString());
             }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
