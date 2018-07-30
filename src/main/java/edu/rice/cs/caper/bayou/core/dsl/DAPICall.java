@@ -169,10 +169,6 @@ public class DAPICall extends DASTNode
 //            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
                 argument = ((CreationReference)(arguments.get(i))).getType().toString();
             }
-            else if (arguments.get(i) instanceof CreationReference) {
-//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
-                argument = ((CreationReference)(arguments.get(i))).getType().toString();
-            }
             else if (arguments.get(i) instanceof Assignment) {
 //            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
                 argument = "Expression = Expression";
