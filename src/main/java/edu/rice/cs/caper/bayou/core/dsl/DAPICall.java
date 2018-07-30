@@ -180,7 +180,15 @@ public class DAPICall extends DASTNode
             else if (arguments.get(i) instanceof PostfixExpression) {
 //            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
                 argument = "java.util.Iterator";
-            }            
+            }
+            else if (arguments.get(i) instanceof TypeMethodReference) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = ((CreationReference)(arguments.get(i))).getType().toString();
+            }
+            else if (arguments.get(i) instanceof SuperMethodInvocation) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = "super";
+            }
 //            else if (arguments.get(i) instanceof DBranch) {
 //            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
 //                argument = "int"; 
