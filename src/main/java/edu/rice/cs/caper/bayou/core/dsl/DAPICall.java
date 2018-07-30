@@ -116,16 +116,15 @@ public class DAPICall extends DASTNode
                 System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
-                argument = "java.lang.String";
-                System.err.println("PrefixExpression:");
-                System.err.println(((PrefixExpression)(arguments.get(i))).toString());
-                System.err.println(((PrefixExpression)(arguments.get(i))).getQualifier().toString());
+                argument = "int"; // Heuristically returning int
             }
             else if (arguments.get(i) instanceof InfixExpression) {
-                argument = "java.lang.String";
-                System.err.println("InfixExpression");
-                System.err.println(((InfixExpression)(arguments.get(i))).toString());
-                System.err.println(((InfixExpression)(arguments.get(i))).getQualifier().toString());
+            	if (((InfixExpression)(arguments.get(i))).getOperator() == PLUS ) {
+            		argument = "java.lang.String";	
+            	}
+            	else {
+            		argument = "int";
+            	}
             }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
