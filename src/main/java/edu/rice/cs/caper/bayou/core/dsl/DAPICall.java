@@ -130,29 +130,37 @@ public class DAPICall extends DASTNode
                 argument = "null";
             }
             else if (arguments.get(i) instanceof FieldAccess) {
-            	System.err.println("FieldAccess : " + ((FieldAccess)(arguments.get(i))).toString());
-                argument = "int"; 
+//            	System.err.println("FieldAccess : " + ((FieldAccess)(arguments.get(i))).toString());
+                argument = "field"; 
             }
             else if (arguments.get(i) instanceof ArrayAccess) {
-            	System.err.println("ArrayAccess : " + ((ArrayAccess)(arguments.get(i))).toString());
-                argument = "int"; 
+//            	System.err.println("ArrayAccess : " + ((ArrayAccess)(arguments.get(i))).toString());
+                argument = "array[index]"; 
             }
             else if (arguments.get(i) instanceof ArrayCreation) {
-            	System.err.println("ArrayCreation : " + ((ArrayCreation)(arguments.get(i))).toString());
-                argument = "int"; 
+//            	System.err.println("ArrayCreation : " + ((ArrayCreation)(arguments.get(i))).toString());
+                argument = ((ArrayCreation)(arguments.get(i))).getType().toString(); 
             }
             else if (arguments.get(i) instanceof LambdaExpression) {
-            	System.err.println("LambdaExpression : " + ((LambdaExpression)(arguments.get(i))).toString());
-                argument = "int"; 
+//            	System.err.println("LambdaExpression : " + ((LambdaExpression)(arguments.get(i))).toString());
+                argument = ""; 
             }
             else if (arguments.get(i) instanceof ExpressionMethodReference) {
-            	System.err.println("ExpressionMethodReference : " + ((ExpressionMethodReference)(arguments.get(i))).toString());
-                argument = "int"; 
+//            	System.err.println(" : " + ((ExpressionMethodReference)(arguments.get(i))).toString());
+                argument = ""; 
             }
-            else if (arguments.get(i) instanceof DBranch) {
-            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
-                argument = "int"; 
+            else if (arguments.get(i) instanceof CastExpression) {
+//            	System.err.println("CastExpression : " + ((CastExpression)(arguments.get(i))).toString());
+                argument = ((CastExpression)(arguments.get(i))).getType().toString(); 
             }
+            else if (arguments.get(i) instanceof InstanceofExpression) {
+//            	System.err.println("InstanceofExpression : " + ((InstanceofExpression)(arguments.get(i))).toString());
+                argument = ""; 
+            }
+//            else if (arguments.get(i) instanceof DBranch) {
+//            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
+//                argument = "int"; 
+//            }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
             }
