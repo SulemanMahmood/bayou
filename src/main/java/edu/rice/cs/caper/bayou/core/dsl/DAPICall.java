@@ -89,7 +89,7 @@ public class DAPICall extends DASTNode
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
             }
             else if (arguments.get(i) instanceof SimpleName) {
-                argument = ((SimpleName)(arguments.get(i))).toString();
+                argument = 'Identifier' ;
             }
             else if (arguments.get(i) instanceof ClassInstanceCreation) {
                 argument = ((ClassInstanceCreation)(arguments.get(i))).getType().toString();
@@ -143,11 +143,11 @@ public class DAPICall extends DASTNode
             }
             else if (arguments.get(i) instanceof LambdaExpression) {
 //            	System.err.println("LambdaExpression : " + ((LambdaExpression)(arguments.get(i))).toString());
-                argument = ""; 
+                argument = "Expression"; 
             }
             else if (arguments.get(i) instanceof ExpressionMethodReference) {
 //            	System.err.println(" : " + ((ExpressionMethodReference)(arguments.get(i))).toString());
-                argument = ""; 
+                argument = "Expression :: "; 
             }
             else if (arguments.get(i) instanceof CastExpression) {
 //            	System.err.println("CastExpression : " + ((CastExpression)(arguments.get(i))).toString());
@@ -155,7 +155,19 @@ public class DAPICall extends DASTNode
             }
             else if (arguments.get(i) instanceof InstanceofExpression) {
 //            	System.err.println("InstanceofExpression : " + ((InstanceofExpression)(arguments.get(i))).toString());
-                argument = ""; 
+                argument = "Expression instanceof " +  ((InstanceofExpression)(arguments.get(i))).getRightOperand().toString(); 
+            }
+            else if (arguments.get(i) instanceof ConditionalExpression) {
+//            	System.err.println("ConditionalExpression : " + ((ConditionalExpression)(arguments.get(i))).toString());
+                argument = "Expression ? Expression : Expression"; 
+            }
+            else if (arguments.get(i) instanceof ParenthesizedExpression) {
+//            	System.err.println("ParenthesizedExpression : " + ((ParenthesizedExpression)(arguments.get(i))).toString());
+                argument = "(Expression)"; 
+            }
+            else if (arguments.get(i) instanceof CreationReference) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = ((CreationReference)(arguments.get(i))).getType().toString();
             }
 //            else if (arguments.get(i) instanceof DBranch) {
 //            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
