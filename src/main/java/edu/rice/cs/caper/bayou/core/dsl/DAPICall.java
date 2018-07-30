@@ -116,7 +116,7 @@ public class DAPICall extends DASTNode
                 argument = "this";
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
-                argument = "int"; // Heuristically returning int
+                argument = "java.util.Iterator"; // Heuristically returning Iterator. May be int of anything
             }
             else if (arguments.get(i) instanceof InfixExpression) {
             	if (((InfixExpression)(arguments.get(i))).getOperator() == InfixExpression.Operator.PLUS ) {
@@ -169,6 +169,18 @@ public class DAPICall extends DASTNode
 //            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
                 argument = ((CreationReference)(arguments.get(i))).getType().toString();
             }
+            else if (arguments.get(i) instanceof CreationReference) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = ((CreationReference)(arguments.get(i))).getType().toString();
+            }
+            else if (arguments.get(i) instanceof Assignment) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = "Expression = Expression";
+            }
+            else if (arguments.get(i) instanceof PostfixExpression) {
+//            	System.err.println("CreationReference : " + ((CreationReference)(arguments.get(i))).toString());
+                argument = "java.util.Iterator";
+            }            
 //            else if (arguments.get(i) instanceof DBranch) {
 //            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
 //                argument = "int"; 
