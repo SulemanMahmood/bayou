@@ -95,7 +95,7 @@ public class DAPICall extends DASTNode
                 argument = ((ClassInstanceCreation)(arguments.get(i))).getType().toString();
             }
             else if (arguments.get(i) instanceof NumberLiteral) {
-                argument = ((NumberLiteral)(arguments.get(i))).toString();
+                argument = "int";
             }
             else if (arguments.get(i) instanceof MethodInvocation) {
                 argument = ((MethodInvocation)(arguments.get(i))).getName().toString();  // Can be alot better
@@ -119,12 +119,13 @@ public class DAPICall extends DASTNode
                 argument = "int"; // Heuristically returning int
             }
             else if (arguments.get(i) instanceof InfixExpression) {
-            	if (((InfixExpression)(arguments.get(i))).getOperator() == PLUS ) {
+            	if (((InfixExpression)(arguments.get(i))).getOperator() == InfixExpression.Operator.PLUS ) {
             		argument = "java.lang.String";	
             	}
             	else {
             		argument = "int";
             	}
+            	System.err.println("InfixExpression : " + argument);
             }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
