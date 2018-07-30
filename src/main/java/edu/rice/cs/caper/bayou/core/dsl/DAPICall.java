@@ -109,10 +109,11 @@ public class DAPICall extends DASTNode
             else if (arguments.get(i) instanceof BooleanLiteral) {
                 argument = "java.lang.Boolean";
             }
+            else if (arguments.get(i) instanceof CharacterLiteral) {
+                argument = "char";
+            }
             else if (arguments.get(i) instanceof ThisExpression) {
                 argument = "this"
-                System.err.println("ThisExpression:");
-                System.err.println(((ThisExpression)(arguments.get(i))).toString());
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
                 argument = "int"; // Heuristically returning int
@@ -124,7 +125,33 @@ public class DAPICall extends DASTNode
             	else {
             		argument = "int";
             	}
-            	System.err.println("InfixExpression : " + argument);
+            }
+            else if (arguments.get(i) instanceof NullLiteral) {
+                argument = "null";
+            }
+            else if (arguments.get(i) instanceof FieldAccess) {
+            	System.err.println("FieldAccess : " + ((FieldAccess)(arguments.get(i))).toString());
+                argument = "int"; 
+            }
+            else if (arguments.get(i) instanceof ArrayAccess) {
+            	System.err.println("ArrayAccess : " + ((ArrayAccess)(arguments.get(i))).toString());
+                argument = "int"; 
+            }
+            else if (arguments.get(i) instanceof ArrayCreation) {
+            	System.err.println("ArrayCreation : " + ((ArrayCreation)(arguments.get(i))).toString());
+                argument = "int"; 
+            }
+            else if (arguments.get(i) instanceof LambdaExpression) {
+            	System.err.println("LambdaExpression : " + ((LambdaExpression)(arguments.get(i))).toString());
+                argument = "int"; 
+            }
+            else if (arguments.get(i) instanceof ExpressionMethodReference) {
+            	System.err.println("ExpressionMethodReference : " + ((ExpressionMethodReference)(arguments.get(i))).toString());
+                argument = "int"; 
+            }
+            else if (arguments.get(i) instanceof DBranch) {
+            	System.err.println("DBranch : " + ((DBranch)(arguments.get(i))).toString());
+                argument = "int"; 
             }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
