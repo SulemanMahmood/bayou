@@ -103,6 +103,30 @@ public class DAPICall extends DASTNode
             else if (arguments.get(i) instanceof QualifiedName) {
                 argument = ((QualifiedName)(arguments.get(i))).toString();
             }
+            else if (arguments.get(i) instanceof StringLiteral) {
+                argument = "java.lang.String";
+            }
+            else if (arguments.get(i) instanceof BooleanLiteral) {
+                argument = "java.lang.Boolean";
+            }
+            else if (arguments.get(i) instanceof ThisExpression) {
+                argument = ((ThisExpression)(arguments.get(i))).getQualifier().toString();
+                System.err.println("This Expression:");
+                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
+                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
+            }
+            else if (arguments.get(i) instanceof PrefixExpression) {
+                argument = "java.lang.String";
+                System.err.println("This Expression:");
+                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
+                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
+            }
+            else if (arguments.get(i) instanceof InfixExpression) {
+                argument = "java.lang.String";
+                System.err.println("This Expression:");
+                System.err.println(((ThisExpression)(arguments.get(i))).ToString());
+                System.err.println(((ThisExpression)(arguments.get(i))).getQualifier().toString());
+            }
             else {
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
             }
