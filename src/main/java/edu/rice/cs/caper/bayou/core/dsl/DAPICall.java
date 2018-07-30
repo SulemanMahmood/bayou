@@ -89,7 +89,7 @@ public class DAPICall extends DASTNode
                 argument = ((TypeLiteral)(arguments.get(i))).getType().toString();
             }
             else if (arguments.get(i) instanceof SimpleName) {
-                argument = 'Identifier' ;
+                argument = "Identifier" ;
             }
             else if (arguments.get(i) instanceof ClassInstanceCreation) {
                 argument = ((ClassInstanceCreation)(arguments.get(i))).getType().toString();
