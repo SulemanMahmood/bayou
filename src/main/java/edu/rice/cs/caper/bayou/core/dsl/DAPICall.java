@@ -113,7 +113,7 @@ public class DAPICall extends DASTNode
                 argument = "char";
             }
             else if (arguments.get(i) instanceof ThisExpression) {
-                argument = "this"
+                argument = "this";
             }
             else if (arguments.get(i) instanceof PrefixExpression) {
                 argument = "int"; // Heuristically returning int
